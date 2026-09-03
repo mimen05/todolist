@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-Do List</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <h1>To-Do List</h1>
+
+    <form id="task-form" class="task-form">
+      <input type="text" id="task-input" placeholder="What needs doing?" autocomplete="off" required>
+
+      <label class="file-label" id="file-label" for="image-input">
+        <span id="file-label-text">+ Add image</span>
+      </label>
+      <input type="file" id="image-input" accept="image/*" hidden >
+
+      <button type="submit">Add</button>
+    </form>
+
+    <div id="image-preview-wrap" class="image-preview-wrap hidden">
+      <img id="image-preview" alt="Preview">
+      <button type="button" id="clear-image" title="Remove image">&times;</button>
+    </div>
+
+    <ul id="task-list" class="task-list"></ul>
+
+    <p id="empty-state" class="empty-state">No tasks yet. Add one above.</p>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
