@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<script src="app.js" defer></script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>To-Do List</title>
@@ -13,7 +16,7 @@
     <form id="task-form" class="task-form">
       <input type="text" id="task-input" placeholder="What needs doing?" autocomplete="off" required>
 
-      <label class="file-label" id="file-label" for="image-input">
+      <label class="file-label" id="file-label" for="image-input"> 
         <span id="file-label-text">+ Add image</span>
       </label>
       <input type="file" id="image-input" accept="image/*" hidden >
@@ -30,7 +33,5 @@
 
     <p id="empty-state" class="empty-state">No tasks yet. Add one above.</p>
   </div>
-
-  <script src="app.js"></script>
 </body>
 </html>

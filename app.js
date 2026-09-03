@@ -1,4 +1,4 @@
-const STORAGE_KEY = "todo-items-v1";
+const STORAGE_KEY = "todo-items";
 
 const form = document.getElementById("task-form");
 const input = document.getElementById("task-input");
@@ -10,7 +10,7 @@ const clearImageBtn = document.getElementById("clear-image");
 const list = document.getElementById("task-list");
 const emptyState = document.getElementById("empty-state");
 
-let pendingImage = null; // base64 data URL for the task currently being composed
+let pendingImage = null; // parks the image before the add button is hit, clears after attached image to task
 
 function loadTasks() {
   try {
@@ -31,13 +31,13 @@ function saveTasks(tasks) {
 }
 
 function render() {
-  const tasks = loadTasks(); //calls the earlier function to pull from localStorage
-  list.innerHTML = ""; //ul task-list from HTML, .innerHTML wipes everything clean
-  emptyState.classList.toggle("hidden", tasks.length > 0); //toggles if the msg is hidden or not (if task is more then 0)
+  const tasks = loadTasks();
+  list.innerHTML = "";
+  emptyState.classList.toggle("hidden", tasks.length > 0);
 
-  for (const task of tasks) { //loop to go thru the tasks array, task is named for every current item
-    const li = document.createElement("li"); //new list element
-    li.className = "task-item" + (task.done ? " done" : ""); 
+  for (const task of tasks) {
+    const li = document.createElement("li");
+    li.className = "task-item" + (task.done ? " done" : "");
     li.dataset.id = task.id;
 
     const checkbox = document.createElement("input");
