@@ -1,4 +1,4 @@
-const STORAGE_KEY = "todo-items";
+const API = "/api/tasks";
 
 const form = document.getElementById("task-form");
 const input = document.getElementById("task-input");
@@ -12,26 +12,19 @@ const emptyState = document.getElementById("empty-state");
 
 let pendingImage = null; // parks the image before the add button is hit, clears after attached image to task
 
-function loadTasks() {
+async function loadTasks() {
   try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-  } catch {
+    const res = await fetch(API);
+    if (!res.ok) throw new Error(`Server said ${res.status}`);
+    return res.json();
+  } catch (err) {
+    console.error("Failed to load tasks:", err);
     return [];
   }
 }
 
-function saveTasks(tasks) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
-    return true;
-  } catch (err) {
-    console.error("Failed to save tasks:", err);
-    return false;
-  }
-}
-
-function render() {
-  const tasks = loadTasks();
+async function render() {
+  const tasks = await loadTasks();
   list.innerHTML = "";
   emptyState.classList.toggle("hidden", tasks.length > 0);
 
@@ -43,7 +36,7 @@ function render() {
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.checked = task.done;
-    checkbox.addEventListener("change", () => toggleTask(task.id));
+    checkbox.addEventListener("change", () => toggleTask(task.id, !task.done));
     li.appendChild(checkbox);
 
     if (task.image) {
@@ -72,34 +65,45 @@ function render() {
   }
 }
 
-function addTask(text, image) {
-  const tasks = loadTasks();
-  tasks.push({
-    id: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
-    text,
-    image: image || null,
-    done: false,
-  });
-  if (!saveTasks(tasks)) {
-    alert("Couldn't save this task — storage is full. Try a smaller image or delete some old tasks.");
+async function addTask(text, image) {
+  try {
+    const res = await fetch(API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text, image }),
+    });
+    if (!res.ok) throw new Error(`Server said ${res.status}`);
+  } catch (err) {
+    console.error("Failed to add task:", err);
+    alert("Couldn't save this task. Is the server running?");
     return false;
   }
-  render();
+  await render();
   return true;
 }
 
-function toggleTask(id) {
-  const tasks = loadTasks();
-  const task = tasks.find((t) => t.id === id);
-  if (task) task.done = !task.done;
-  saveTasks(tasks);
-  render();
+async function toggleTask(id, done) {
+  try {
+    const res = await fetch(`${API}/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ done }),
+    });
+    if (!res.ok) throw new Error(`Server said ${res.status}`);
+  } catch (err) {
+    console.error("Failed to update task:", err);
+  }
+  await render();
 }
 
-function deleteTask(id) {
-  const tasks = loadTasks().filter((t) => t.id !== id);
-  saveTasks(tasks);
-  render();
+async function deleteTask(id) {
+  try {
+    const res = await fetch(`${API}/${id}`, { method: "DELETE" });
+    if (!res.ok) throw new Error(`Server said ${res.status}`);
+  } catch (err) {
+    console.error("Failed to delete task:", err);
+  }
+  await render();
 }
 
 function openImage(dataUrl) {
@@ -151,7 +155,7 @@ imageInput.addEventListener("change", () => {
   const reader = new FileReader();
   reader.onload = () => {
     resizeImage(reader.result, 800).then((resized) => {
-      pendingImage = resized; // base64 data URL, downscaled to keep localStorage happy
+      pendingImage = resized; // base64 data URL, downscaled to keep the request small
       previewImg.src = pendingImage;
       previewWrap.classList.remove("hidden");
       fileLabelText.textContent = file.name;
@@ -162,12 +166,12 @@ imageInput.addEventListener("change", () => {
 
 clearImageBtn.addEventListener("click", resetImagePicker);
 
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const text = input.value.trim();
   if (!text) return;
 
-  if (addTask(text, pendingImage)) {
+  if (await addTask(text, pendingImage)) {
     input.value = "";
     resetImagePicker();
   }
