@@ -1,0 +1,114 @@
+<mxfile host="Electron" agent="todolist" type="device">
+  <diagram id="current" name="Current schema">
+    <mxGraphModel dx="1100" dy="760" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t1" value="todolist — current schema" style="text;html=1;align=left;verticalAlign=middle;fontSize=20;fontStyle=1;fontColor=#0E6E62;" vertex="1" parent="1">
+          <mxGeometry x="40" y="30" width="420" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="t2" value="One entity, no relationships. This is what schema.sql creates." style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#5C6373;" vertex="1" parent="1">
+          <mxGeometry x="40" y="58" width="460" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="tasks" value="tasks" style="swimlane;fontStyle=1;align=center;childLayout=stackLayout;horizontal=1;startSize=32;horizontalStack=0;resizeParent=1;resizeParentMax=0;html=1;whiteSpace=wrap;fillColor=#E8F2F0;strokeColor=#0E6E62;fontColor=#0E6E62;swimlaneFillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="40" y="110" width="300" height="162" as="geometry" />
+        </mxCell>
+        <mxCell id="tasks_id" value="PK   id            bigserial" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;fontStyle=1;fontFamily=Courier New;strokeColor=none;fillColor=none;" vertex="1" parent="tasks">
+          <mxGeometry y="32" width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="tasks_text" value="      text          text          NOT NULL" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;fontFamily=Courier New;strokeColor=none;fillColor=none;" vertex="1" parent="tasks">
+          <mxGeometry y="58" width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="tasks_image" value="      image        text          NULL" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;fontFamily=Courier New;strokeColor=none;fillColor=none;" vertex="1" parent="tasks">
+          <mxGeometry y="84" width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="tasks_done" value="      done         boolean    NOT NULL" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;fontFamily=Courier New;strokeColor=none;fillColor=none;" vertex="1" parent="tasks">
+          <mxGeometry y="110" width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="tasks_created" value="      created_at  timestamptz  NOT NULL" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;fontFamily=Courier New;strokeColor=none;fillColor=none;" vertex="1" parent="tasks">
+          <mxGeometry y="136" width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="note1" value="PK = primary key, the column that uniquely identifies a row.&#10;&#10;An ERD with one table has no relationships to show — it only&#10;starts earning its keep at two tables or more. See page 2 for&#10;what this becomes once you add users and tags." style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=12;fontColor=#5C6373;" vertex="1" parent="1">
+          <mxGeometry x="380" y="110" width="380" height="120" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="future" name="With users and tags">
+    <mxGraphModel dx="1100" dy="760" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="826" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="f_t1" value="todolist — with users and tags (not built)" style="text;html=1;align=left;verticalAlign=middle;fontSize=20;fontStyle=1;fontColor=#0E6E62;" vertex="1" parent="1">
+          <mxGeometry x="40" y="30" width="560" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="f_t2" value="A one-to-many relationship, and a many-to-many that needs a join table." style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#5C6373;" vertex="1" parent="1">
+          <mxGeometry x="40" y="58" width="560" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="users" value="users" style="swimlane;fontStyle=1;align=center;childLayout=stackLayout;horizontal=1;startSize=32;horizontalStack=0;resizeParent=1;resizeParentMax=0;html=1;whiteSpace=wrap;fillColor=#E8F2F0;strokeColor=#0E6E62;fontColor=#0E6E62;swimlaneFillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="40" y="120" width="250" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="u_id" value="PK   id         bigserial" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;fontStyle=1;fontFamily=Courier New;strokeColor=none;fillColor=none;" vertex="1" parent="users">
+          <mxGeometry y="32" width="250" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u_email" value="      email     text  UNIQUE" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;fontFamily=Courier New;strokeColor=none;fillColor=none;" vertex="1" parent="users">
+          <mxGeometry y="58" width="250" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u_name" value="      name      text" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;fontFamily=Courier New;strokeColor=none;fillColor=none;" vertex="1" parent="users">
+          <mxGeometry y="84" width="250" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="f_tasks" value="tasks" style="swimlane;fontStyle=1;align=center;childLayout=stackLayout;horizontal=1;startSize=32;horizontalStack=0;resizeParent=1;resizeParentMax=0;html=1;whiteSpace=wrap;fillColor=#E8F2F0;strokeColor=#0E6E62;fontColor=#0E6E62;swimlaneFillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="440" y="120" width="300" height="188" as="geometry" />
+        </mxCell>
+        <mxCell id="f_t_id" value="PK   id            bigserial" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;fontStyle=1;fontFamily=Courier New;strokeColor=none;fillColor=none;" vertex="1" parent="f_tasks">
+          <mxGeometry y="32" width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="f_t_user" value="FK   user_id      bigint     NOT NULL" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;fontStyle=2;fontColor=#8A4B12;fontFamily=Courier New;strokeColor=none;fillColor=none;" vertex="1" parent="f_tasks">
+          <mxGeometry y="58" width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="f_t_text" value="      text          text          NOT NULL" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;fontFamily=Courier New;strokeColor=none;fillColor=none;" vertex="1" parent="f_tasks">
+          <mxGeometry y="84" width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="f_t_image" value="      image        text          NULL" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;fontFamily=Courier New;strokeColor=none;fillColor=none;" vertex="1" parent="f_tasks">
+          <mxGeometry y="110" width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="f_t_done" value="      done         boolean    NOT NULL" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;fontFamily=Courier New;strokeColor=none;fillColor=none;" vertex="1" parent="f_tasks">
+          <mxGeometry y="136" width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="f_t_created" value="      created_at  timestamptz  NOT NULL" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;fontFamily=Courier New;strokeColor=none;fillColor=none;" vertex="1" parent="f_tasks">
+          <mxGeometry y="162" width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="task_tags" value="task_tags" style="swimlane;fontStyle=1;align=center;childLayout=stackLayout;horizontal=1;startSize=32;horizontalStack=0;resizeParent=1;resizeParentMax=0;html=1;whiteSpace=wrap;fillColor=#F6E7D6;strokeColor=#8A4B12;fontColor=#8A4B12;swimlaneFillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="440" y="420" width="300" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="tt_task" value="FK   task_id   bigint   NOT NULL" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;fontStyle=2;fontColor=#8A4B12;fontFamily=Courier New;strokeColor=none;fillColor=none;" vertex="1" parent="task_tags">
+          <mxGeometry y="32" width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="tt_tag" value="FK   tag_id     bigint   NOT NULL" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;fontStyle=2;fontColor=#8A4B12;fontFamily=Courier New;strokeColor=none;fillColor=none;" vertex="1" parent="task_tags">
+          <mxGeometry y="58" width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="tags" value="tags" style="swimlane;fontStyle=1;align=center;childLayout=stackLayout;horizontal=1;startSize=32;horizontalStack=0;resizeParent=1;resizeParentMax=0;html=1;whiteSpace=wrap;fillColor=#E8F2F0;strokeColor=#0E6E62;fontColor=#0E6E62;swimlaneFillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="880" y="420" width="240" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="tg_id" value="PK   id      bigserial" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;fontStyle=1;fontFamily=Courier New;strokeColor=none;fillColor=none;" vertex="1" parent="tags">
+          <mxGeometry y="32" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="tg_name" value="      name  text  UNIQUE" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;fontFamily=Courier New;strokeColor=none;fillColor=none;" vertex="1" parent="tags">
+          <mxGeometry y="58" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="one user has many tasks" style="edgeStyle=entityRelationEdgeStyle;html=1;rounded=0;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;strokeColor=#0E6E62;fontSize=11;fontColor=#5C6373;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="users" target="f_tasks">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="one task, many tag links" style="edgeStyle=entityRelationEdgeStyle;html=1;rounded=0;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;strokeColor=#8A4B12;fontSize=11;fontColor=#5C6373;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="f_tasks" target="task_tags">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="one tag, many task links" style="edgeStyle=entityRelationEdgeStyle;html=1;rounded=0;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;strokeColor=#8A4B12;fontSize=11;fontColor=#5C6373;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="tags" target="task_tags">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="note2" value="The splayed &quot;crow's foot&quot; end means MANY.&#10;The single bar means ONE.&#10;&#10;A foreign key (FK) always lives on the many side.&#10;&#10;tasks and tags are many-to-many: a task can have&#10;many tags AND a tag can apply to many tasks. There&#10;is nowhere to put a single FK for that, so task_tags&#10;exists purely to hold the pairs. That is a join table." style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=12;fontColor=#5C6373;" vertex="1" parent="1">
+          <mxGeometry x="40" y="420" width="360" height="200" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
